@@ -60,6 +60,8 @@ To enable automatic mounting (on boot), we add the following line to `/etc/fstab
 10.4.18.3:/mnt/rrc/home /home nfs rw,soft,intr 0 0
 ```
 
+At this point the local /home directory on our node should contain all the user directories fetched from black. This centralised setup allows users to easily move between different nodes, and allows us to manage daily backups and quotas from a single location. But since this is mounted over the network, there will be latency and so we expect users to use this directory only as a cold long-term storage. For local operations we setup a scratch drive.
+
 <br>
 
 ## Scratch space mount
@@ -71,11 +73,28 @@ mkdir /scratch
 mount /dev/sdb1 /scratch
 ```
 
-In addition, like before, we add the following line to `/etc/fstab` (run `blkid` to identify the right UUID):
+In addition, as done for the home space mount, we add the following line to `/etc/fstab` (run `blkid` to identify the right UUID):
 
 ```bash
 /dev/disk/by-uuid/b63e7654-3442-4eb7-98d4-25e78618d235 /scratch ext4 defaults 0 0
 ```
+
+Since this is a drive shared by all the users connected to the node, we setup `quota` to prevent any user from occupying too much space that would restrict other users. To enable quota for /scratch, we first modify the `/etc/fstab` file with the `usrquota` option as follows:
+
+```bash
+/dev/disk/by-uuid/b63e7654-3442-4eb7-98d4-25e78618d235 /scratch ext4 defaults,usrquota 0 0
+```
+
+Then we remount the drive and create the quota index and quota files using the following commands:
+
+```bash
+apt install quota
+mount -o remount /scratch
+quotacheck -cum /scratch
+quotaon /scratch
+```
+
+Though quota is enabled for the drive now, we allocate quotas for the users only when the disk usage exceeds a certain threshold. This is explained in the `Custom Scripts` section.
 
 <br>
 
