@@ -85,13 +85,14 @@ Since this is a drive shared by all the users connected to the node, we setup `q
 /dev/disk/by-uuid/b63e7654-3442-4eb7-98d4-25e78618d235 /scratch ext4 defaults,usrquota 0 0
 ```
 
-Then we remount the drive and create the quota index and quota files using the following commands:
+Then we remount the drive, create the quota index and quota files, and set the permissions using the following commands:
 
 ```bash
 apt install quota
 mount -o remount /scratch
 quotacheck -cum /scratch
 quotaon /scratch
+chmod 777 /scratch
 ```
 
 Though quota is enabled for the drive now, we allocate quotas for the users only when the disk usage exceeds a certain threshold. This is explained in the `Custom Scripts` section.
