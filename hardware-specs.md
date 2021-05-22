@@ -9,7 +9,10 @@
 |Nucleus|IPA & Monitoring|Core i7-2600K (4 physical cores)|4x 4 GB Corsair DDR3|-|1) 1 TB Toshiba HDD|
 
 ## Desktop PCs
-TODO
+|Name | Purpose | CPU | RAM | GPU |Disks|
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-------:|
+|TARS|ROS (Ubuntu 16.04/18.04) + AirSim (Windows 10)|Xeon (?) (12 physical cores)| 4x 8 GB G-Skill DDR4 | 1x 12 GB GTX Titan X Maxwell | 1) 500 GB Cruical NVMe SSD (18.04)<br> 2) 500 GB Crucial SSD (Windows 10) <br> 3) 1 TB Seagate HDD (Storage) <br> 4) 480 GB Kingston SSD (18.04) <br> 5) 250 GB WesternDigital SSD (16.04) <br> 6) 3 TB WesternDigital HDD (Storage)|
+|Simulator PC|ROS + Simulators (Ubuntu 18.04)|Ryzen 7 2700x (8 physical cores)|4x 16 GB Corsair DDR4 | 1x 8 GB GTX 1070 Ti Pascal | 1) 512 GB Adata NVMe SSD (OS) <br> 2) 1 TB Seagate HDD (Scratch) <br>3) 1 TB Crucial SSD (Scratch)
 
 ## Laptops
 TODO
